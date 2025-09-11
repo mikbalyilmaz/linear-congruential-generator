@@ -65,7 +65,7 @@ An auxiliary function **`analyze_sequence()`** computes statistical properties s
 - preview of the first numbers  
 
 ---
-## 📖 Citation
+## Citation
 
 If you use this repository in your work, please cite it as follows:
 
