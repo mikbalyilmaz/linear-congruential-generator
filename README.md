@@ -71,10 +71,12 @@ If you use this repository in your work, please cite it as follows:
 
 **APA style:**
 
-Yilmaz, M. I. (2025). *Linear Congruential Generator (LCG) - Theory and Implementation*. GitHub. https://github.com/<your-username>/<repo-name>
+> Yilmaz, M. I. (2025). *Linear Congruential Generator (LCG) - Theory and Implementation*. GitHub.  
+> Available at: [https://github.com/<your-username>/<repo-name>](https://github.com/<your-username>/<repo-name>)
 
 **BibTeX:**
 
+```bibtex
 @misc{yilmaz2025lcg,
   author       = {Muhammed Ikbal Yilmaz},
   title        = {Linear Congruential Generator (LCG) - Theory and Implementation},
