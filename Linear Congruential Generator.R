@@ -1,5 +1,5 @@
 # Linear Congruential Generator (LCG) Implementation in R
-# Author: Muhammed Ikbal Yilmaz style clean coding
+# Author: Muhammed Ikbal Yilmaz
 
 # LCG function: generates a sequence and detects repetition
 lcg <- function(a, c, m, seed, max_iter = 1e6, verbose = TRUE) {
