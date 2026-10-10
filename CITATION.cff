@@ -9,6 +9,7 @@ authors:
     affiliation: "Department of Econometrics, Ankara Hacı Bayram Veli University"
 repository-code: "https://github.com/mikbalyilmaz/linear-congruential-generator"
 license: MIT
+date-released: "2026-10-10"
 keywords:
   - pseudo-random numbers
   - linear congruential generator
