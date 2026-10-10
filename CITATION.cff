@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Linear congruential generator in R: period, lattice structure and empirical tests"
+version: 2.0.0
+authors:
+  - family-names: "Yılmaz"
+    given-names: "Muhammed İkbal"
+    email: "myucanlar@gmail.com"
+    affiliation: "Department of Econometrics, Ankara Hacı Bayram Veli University"
+repository-code: "https://github.com/mikbalyilmaz/linear-congruential-generator"
+license: MIT
+keywords:
+  - pseudo-random numbers
+  - linear congruential generator
+  - Hull-Dobell theorem
+  - spectral test
+  - R

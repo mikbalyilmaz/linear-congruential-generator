@@ -1,0 +1,7 @@
+"generator","a","m","nu2","line_spacing","normalized","note"
+"V1 example 1",1079,7919219,1079.00046339193,0.000926783661293726,0.356817191386769,""
+"V1 example 2",1722,9969219,1722.00029036002,0.000580719994995429,0.507537303446354,""
+"V1 example 3",11,32,3.16227766016838,0.316227766016838,0.520223931285977,""
+"RANDU",65539,2147483648,NA,NA,NA,"m > 2^26: not computed with double-precision arithmetic"
+"MINSTD (Park-Miller)",16807,2147483647,NA,NA,NA,"m > 2^26: not computed with double-precision arithmetic"
+"rand48 parameters",25214903917,281474976710656,NA,NA,NA,"m > 2^26: not computed with double-precision arithmetic"

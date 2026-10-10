@@ -1,0 +1,7 @@
+"generator","a","c","m","m_factorised","gcd_a_m","hd_c_coprime","hd_prime_factors","hd_four","max_period","tail","period","share_of_m","method"
+"V1 example 1","1,079","863","7,919,219","7 * 11 * 19 * 5413",1,TRUE,FALSE,TRUE,7919219,0,56826,0.00717570760449989,"Brent's algorithm"
+"V1 example 2","1,722","990","9,969,219","3^2 * 13 * 139 * 613",3,FALSE,FALSE,TRUE,9969219,2,14076,0.00141194611132527,"Brent's algorithm"
+"V1 example 3","11","0","32","2^5",1,NA,NA,NA,8,0,8,0.25,"Multiplicative order"
+"RANDU","65,539","0","2,147,483,648","2^31",1,NA,NA,NA,536870912,0,536870912,0.25,"Multiplicative order"
+"MINSTD (Park-Miller)","16,807","0","2,147,483,647","2147483647",1,NA,NA,NA,2147483646,0,2147483646,0.999999999534339,"Multiplicative order"
+"rand48 parameters","25,214,903,917","11","281,474,976,710,656","2^48",1,TRUE,TRUE,TRUE,281474976710656,0,281474976710656,1,"Hull-Dobell theorem"

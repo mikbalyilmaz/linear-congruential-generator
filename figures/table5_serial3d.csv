@@ -1,0 +1,7 @@
+"generator","n","test","statistic","df","p_value","note"
+"V1 example 1",3e+05,"Serial, 3-tuples (20^3 cells)",NA,NA,NA,"period 56,826 is shorter than the sample"
+"V1 example 2",3e+05,"Serial, 3-tuples (20^3 cells)",NA,NA,NA,"period 14,076 is shorter than the sample"
+"RANDU",3e+05,"Serial, 3-tuples (20^3 cells)",80064.0000000003,7999,0,""
+"MINSTD (Park-Miller)",3e+05,"Serial, 3-tuples (20^3 cells)",7964.64000000025,7999,0.605178360993546,""
+"rand48 parameters",3e+05,"Serial, 3-tuples (20^3 cells)",7968.48000000028,7999,0.593412446957424,""
+"Mersenne-Twister (R)",3e+05,"Serial, 3-tuples (20^3 cells)",7686.56000000027,7999,0.993752311796275,""
