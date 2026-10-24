@@ -1,58 +1,61 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[11pt,a4paper]{article}
 
-% Encoding and typeface: XeLaTeX with Latin Modern Roman (fontspec default), English via polyglossia
+% Typeface: XeLaTeX with Latin Modern Roman (fontspec default)
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage[variant=british]{english}
 
-% Layout (tight margins)
-\usepackage[a4paper,top=1.2cm,bottom=1.3cm,left=1.3cm,right=1.3cm]{geometry}
+% Page: the measures of the note template (A4, 11 pt, 4.5 cm side margins, header and page count)
+\usepackage[a4paper,left=4.5cm,right=4.5cm,top=4.5cm,bottom=4.1cm,headheight=14pt,headsep=0.55cm,
+  footskip=0.55cm]{geometry}
+\linespread{0.946}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{PROJECT NOTE} $|$ LCG in R}
+\fancyhead[R]{\small\textbf{Compiled on:} \notedate}
+\fancyfoot[C]{\small\thepage\,/\,\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
 
-% Typography
 \usepackage{microtype}
-\usepackage{setspace}
-\setstretch{0.92}
-
-% Paragraph settings
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
-
-% Section styling
-\usepackage{titlesec}
-\titleformat{\section}{\bfseries\normalsize}{\thesection.}{0.4em}{}
-\titlespacing*{\section}{0pt}{6pt}{3pt}
-
-% Better lists
-\usepackage{enumitem}
-\setlist{noitemsep, topsep=2pt}
-
-% Mathematics, tables, figures
-\usepackage{amsmath}
-\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,tabularx}
 \usepackage{graphicx}
-\usepackage[font=small,labelfont=bf,labelsep=period,skip=3pt]{caption}
-\setlength{\textfloatsep}{8pt}
-\setlength{\floatsep}{6pt}
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=3pt, leftmargin=*}
+\usepackage{xcolor}
+\definecolor{secblue}{HTML}{1F3A5F}
+\definecolor{boxback}{HTML}{EEF2F6}
+\definecolor{mark}{HTML}{9B2226}
+\definecolor{hl}{HTML}{FFF36B}
+\usepackage{titlesec}
+\titleformat{\section}{\color{secblue}\bfseries\normalsize}{\thesection.}{0.4em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\usepackage[font=small,labelfont=bf,labelsep=period,skip=4pt]{caption}
+\usepackage[bottom]{footmisc}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\textfloatsep}{10pt}
+\emergencystretch=3em
+
+\newcommand{\notedate}{\number\day\space\ifcase\month\or January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi\space\number\year}
 
 \input{numbers_en.tex}
 
 \begin{document}
 
-% Header (top-right)
-\begin{flushright}
-\small \textbf{Compiled on:} \today
-\end{flushright}
 
-\vspace{-6pt}
-\hrule
-\vspace{24pt}
+\vspace*{14pt}
+\begin{tabular}{@{}p{2.35cm}@{}p{\dimexpr\textwidth-2.35cm}@{}}
+\textbf{TITLE:} & \textbf{\large Linear congruential generator (LCG): period, lattice structure and empirical tests}\\[3pt]
+\textbf{SUBJECT:} & Aim, method and results of the analyses in version 2 of the \texttt{linear-congruential-generator} repository\\[3pt]
+\textbf{AUTHOR:} & Muhammed İkbal Yılmaz (myucanlar@gmail.com)
+\end{tabular}
 
-\textbf{TITLE:} Linear congruential generator (LCG): period, lattice structure and empirical tests
-
-\textbf{SUBJECT:} Aim, method and results of the analyses in version 2 of the \texttt{linear-congruential-generator} repository
-
-\textbf{PREPARED BY:} Muhammed İkbal Yılmaz (myucanlar@gmail.com)
-
+\vspace{8pt}
 \vspace{12pt}
 
 \section{Aim and scope}
@@ -115,7 +118,8 @@ to $m$, the period is the multiplicative order of $a$ modulo $m$; this order is 
 \centering\footnotesize\setlength{\tabcolsep}{4pt}
 \caption{Hull--Dobell conditions and tail and cycle lengths (seed $x_0=1$; $x_0=27$ for example 3). The conditions are shown
 only for $c\ne0$.}\label{tab:period}
-\begin{tabular}{lrrlccccrl}
+\scriptsize\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.5cm}rrlccccr>{\raggedright\arraybackslash}p{1.45cm}@{}}
 \toprule
  & & & & \multicolumn{3}{c}{Hull--Dobell} & & & \\
 \cmidrule(lr){5-7}
@@ -154,7 +158,7 @@ full period of example 1 (\ExOnePeriod{} pairs). For comparison, the same number
 second panel. Without a lattice structure the points scatter.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.86\linewidth]{../figures/fig1_pairs.pdf}
+\centering\includegraphics[width=\textwidth]{../figures/fig1_pairs.pdf}
 \caption{Successive pairs $(u_n, u_{n+1})$ with $u_n < 0.004$. Left: example 1 of version 1, full period. Right: the same
 number of Mersenne-Twister pairs.}\label{fig:lattice}
 \end{figure}
@@ -180,9 +184,11 @@ finer grid ($20^3$ cells) was then run on \SerialN{} numbers.
 \centering\footnotesize\setlength{\tabcolsep}{4pt}
 \caption{$p$-values. First six columns: \BatteryN{} numbers per generator. Last column: non-overlapping triples, $20^3$
 cells, \SerialN{} numbers.}\label{tab:tests}
-\begin{tabular}{lccccccc}
+\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.1cm}cccccc>{\raggedright\arraybackslash}p{1.5cm}@{}}
 \toprule
- & Equidistribution & KS & Pairs & Triples & Autocorrelation & Runs & Triples, $20^3$ \\
+ & Equi- & & & & Auto- & & Triples, \\
+ & distribution & KS & Pairs & Triples & correlation & Runs & $20^3$ \\
 \midrule
 \input{tab_battery_en.tex}
 \end{tabular}
@@ -202,7 +208,7 @@ lies on one of \RanduPlanes{} parallel planes in the unit cube (Marsaglia, 1968)
 size, the values spread continuously.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.86\linewidth]{../figures/fig2_randu_planes.pdf}
+\centering\includegraphics[width=\textwidth]{../figures/fig2_randu_planes.pdf}
 \caption{Histogram of $9u_k - 6u_{k+1} + u_{k+2}$ over \RanduTriples{} consecutive triples (bin width 0.05).}\label{fig:randu}
 \end{figure}
 
@@ -224,7 +230,7 @@ of slope $k$, so the order of growth can be read directly. The least-squares slo
 and \SlopeVTwo{} for version 2 (linear).
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.86\linewidth]{../figures/fig3_performance.pdf}
+\centering\includegraphics[width=\textwidth]{../figures/fig3_performance.pdf}
 \caption{Running time, median of three measurements (\PerfMachine). Left: finding the cycle (version 1 only up to $2^{15}$).
 Right: generating $n$ MINSTD numbers.}\label{fig:time}
 \end{figure}
@@ -249,22 +255,23 @@ thousand numbers the plain loop is faster. Absolute times depend on the machine;
 
 \section*{References}
 {\small
-Brent, R. P. (1980). An improved Monte Carlo factorization algorithm. \textit{BIT}, 20, 176--184.\\
-Brown, F. B. (1994). Random number generation with arbitrary strides. \textit{Trans.\ American Nuclear Society}, 71, 202--203.\\
-Hull, T. E. and Dobell, A. R. (1962). Random number generators. \textit{SIAM Review}, 4(3), 230--254.\\
-Knuth, D. E. (1997). \textit{The Art of Computer Programming, Vol.\ 2: Seminumerical Algorithms}, 3rd ed. Addison-Wesley.\\
-L'Ecuyer, P. (1999). Tables of linear congruential generators of different sizes and good lattice structure.
-\textit{Mathematics of Computation}, 68, 249--260.\\
-L'Ecuyer, P. and Simard, R. (2007). TestU01: A C library for empirical testing of random number generators.
-\textit{ACM Trans.\ Mathematical Software}, 33, Article 22.\\
-Marsaglia, G. (1968). Random numbers fall mainly in the planes. \textit{PNAS}, 61(1), 25--28.\\
-Matsumoto, M. and Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number
-generator. \textit{ACM Trans.\ Modeling and Computer Simulation}, 8(1), 3--30.\\
-Park, S. K. and Miller, K. W. (1988). Random number generators: Good ones are hard to find. \textit{Communications of the ACM},
-31(10), 1192--1201.
+\setlength{\parskip}{2pt}
+\hangindent=1.27cm\hangafter=1 Brent, R. P. (1980). An improved Monte Carlo factorization algorithm. \textit{BIT}, 20(2), 176--184.\par
+\hangindent=1.27cm\hangafter=1 Brown, F. B. (1994). Random number generation with arbitrary strides. \textit{Transactions of the American Nuclear Society}, 71, 202--203.\par
+\hangindent=1.27cm\hangafter=1 Hull, T. E., \& Dobell, A. R. (1962). Random number generators. \textit{SIAM Review}, 4(3), 230--254.\par
+\hangindent=1.27cm\hangafter=1 Knuth, D. E. (1997). \textit{The Art of Computer Programming, Vol.\ 2: Seminumerical Algorithms} (3rd ed.). Addison-Wesley.\par
+\hangindent=1.27cm\hangafter=1 L'Ecuyer, P. (1999). Tables of linear congruential generators of different sizes and good lattice structure.
+\textit{Mathematics of Computation}, 68(225), 249--260.\par
+\hangindent=1.27cm\hangafter=1 L'Ecuyer, P., \& Simard, R. (2007). TestU01: A C library for empirical testing of random number generators.
+\textit{ACM Transactions on Mathematical Software}, 33(4), Article 22.\par
+\hangindent=1.27cm\hangafter=1 Marsaglia, G. (1968). Random numbers fall mainly in the planes. \textit{Proceedings of the National Academy of Sciences}, 61(1), 25--28.\par
+\hangindent=1.27cm\hangafter=1 Matsumoto, M., \& Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number
+generator. \textit{ACM Transactions on Modeling and Computer Simulation}, 8(1), 3--30.\par
+\hangindent=1.27cm\hangafter=1 Park, S. K., \& Miller, K. W. (1988). Random number generators: Good ones are hard to find. \textit{Communications of the ACM},
+31(10), 1192--1201.\par
 
 \smallskip
-An AI coding assistant was used in writing the code and in preparing this note. All numbers are generated from
+All numbers are generated from
 \texttt{figures/*.csv} by \texttt{make\_paper.R}.
 }
 

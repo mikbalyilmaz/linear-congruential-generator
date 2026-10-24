@@ -1,5 +1,24 @@
 # Changes
 
+## Version 2.1.0
+
+No result changed: every table and every number in the notes is the same as in version 2.0.0.
+
+- Figures redrawn in the style of the charts on muhammedikbalyilmaz.com: series in black and deep blue (#0033a0),
+  red dotted lines for dates and reference values, labels at the end of the lines where possible, bold panel titles,
+  Latin Modern Roman. Every figure is 4.75 inches wide, the width of the text in the notes.
+- Every figure is drawn in English and in Turkish (decimal comma), as before.
+- Axis rule: every value axis starts and ends at a labelled tick, and there are no minor ticks (`R/plot_style.R`:
+  `axis_limits()`, `log10_limits()`, `value_axis()`, `log10_axis()`). Headings and panel titles are shortened or wrapped
+  so that no text is clipped.
+- `Rscript 04_performance.R --plot-only` redraws Figure 3 from the stored timings (`figures/table8_performance.csv`)
+  without timing again; timings depend on the machine.
+- The project notes now use the note template: 11 pt, A4, 4.5 cm side margins, a header with the short name and
+  the compilation date, and the page count. Wide equations and tables were split or set in a smaller size to fit the
+  narrower text block.
+- References: one paragraph per entry with a 1.27 cm hanging indent, an ampersand before the last author (APA 7), full
+  journal names, issue numbers where they were missing and editions in parentheses.
+
 ## Version 2.0.0
 
 ### New

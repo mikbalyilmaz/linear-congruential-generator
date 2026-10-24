@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "Linear congruential generator in R: period, lattice structure and empirical tests"
-version: 2.0.0
+version: 2.1.0
 authors:
   - family-names: "Yılmaz"
     given-names: "Muhammed İkbal"
@@ -9,7 +9,7 @@ authors:
     affiliation: "Department of Econometrics, Ankara Hacı Bayram Veli University"
 repository-code: "https://github.com/mikbalyilmaz/linear-congruential-generator"
 license: MIT
-date-released: "2026-10-10"
+date-released: "2026-10-24"
 keywords:
   - pseudo-random numbers
   - linear congruential generator

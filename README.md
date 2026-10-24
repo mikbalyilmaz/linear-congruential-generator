@@ -56,6 +56,7 @@ multiplicative_order(16807, 2^31 - 1)   # MINSTD: period 2^31 - 2
 Rscript tests/run_tests.R
 cd analysis
 Rscript run_all.R                       # about 4 minutes, most of it in 04_performance.R
+Rscript 04_performance.R --plot-only   # redraw Figure 3 from the saved timings, without timing again
 cd ../paper
 Rscript make_paper.R
 xelatex lcg_note.tex && xelatex lcg_note.tex   # English; needs a TeX installation with XeLaTeX
@@ -131,7 +132,7 @@ LCGs are not suitable for cryptography, and for simulation R's built-in generato
 
 Citation metadata are in [`CITATION.cff`](CITATION.cff); GitHub shows them under "Cite this repository".
 
-> Yılmaz, M. İ. (2026). *Linear congruential generator in R: period, lattice structure and empirical tests* (Version 2.0.0)
+> Yılmaz, M. İ. (2026). *Linear congruential generator in R: period, lattice structure and empirical tests* (Version 2.1.0)
 > [Computer software]. https://github.com/mikbalyilmaz/linear-congruential-generator
 
 ## Licence

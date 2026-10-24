@@ -70,20 +70,23 @@ values <- lapply(ids_fig, function(id) {
 # Why this figure: the three-dimensional serial test only says that RANDU's triples are not uniform. The
 # histogram shows why: the combination 9u(k) - 6u(k+1) + u(k+2) takes integer values only, i.e. every triple
 # lies on one of a few parallel planes. MINSTD, with the same modulus size, is shown for comparison.
-save_figure("fig2_randu_planes", width = 7, height = 3.2,
+save_figure("fig2_randu_planes", height = 2.5,
             heading = function() L("Figure 2. Value of 9u(k) - 6u(k+1) + u(k+2) over 299,998 consecutive triples (bins of width 0.05)",
-                                   "\u015eekil 2. 299.998 ard\u0131\u015f\u0131k \u00fc\u00e7l\u00fcde 9u(k) - 6u(k+1) + u(k+2) de\u011feri"), function() {
+                                   "\u015eekil 2. 299.998 ard\u0131\u015f\u0131k \u00fc\u00e7l\u00fcde 9u(k) - 6u(k+1) + u(k+2) de\u011feri (0,05 geni\u015fli\u011finde s\u0131n\u0131flar)"), function() {
   par(mfrow = c(1, 2))
+  x_ax <- axis_limits(c(-6, 10), 2)
   for (j in seq_along(ids_fig)) {
     v <- values[[j]]
     breaks <- seq(-6, 10, by = 0.05)
     h <- hist(v, breaks = breaks, plot = FALSE)
     counts <- h$counts / 1000
-    plot(NA, xlim = c(-6, 10), ylim = c(0, max(counts) * 1.05), xlab = "9u(k) - 6u(k+1) + u(k+2)",
-         ylab = L("Triples (thousands)", "\u00dc\u00e7l\u00fc say\u0131s\u0131 (bin)"), xaxs = "i", yaxs = "i")
-    grid_lines(y = pretty(c(0, max(counts))))
-    col <- if (j == 1) ORANGE else BLUE
+    y_ax <- axis_limits(c(0, counts), if (max(counts) > 10) 10 else 0.5)
+    plot(NA, xlim = x_ax$lim, ylim = y_ax$lim, xlab = "9u(k) - 6u(k+1) + u(k+2)",
+         ylab = L("Triples, thousands", "\u00dc\u00e7l\u00fc say\u0131s\u0131, bin"), axes = FALSE)
+    value_axis(1, x_ax$at)
+    value_axis(2, y_ax$at)
+    col <- if (j == 1) INK else BLUE
     rect(h$breaks[-length(h$breaks)], 0, h$breaks[-1], counts, col = col, border = col, lwd = 0.3)
-    panel_title(label_of(ids_fig[j]))
+    panel_title(sprintf("(%s) %s", letters[j], label_of(ids_fig[j])))
   }
 })

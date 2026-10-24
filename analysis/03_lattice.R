@@ -30,21 +30,24 @@ window_pairs <- function(u) {
   list(x = u[-length(u)][keep], y = u[-1][keep])
 }
 panels <- list(window_pairs(u_lcg), window_pairs(u_mt))
-cols <- c(BLUE, ORANGE)
+cols <- c(BLUE, INK)
 
-save_figure("fig1_pairs", width = 7, height = 3.4,
+save_figure("fig1_pairs", height = 2.5,
             heading = function() L(sprintf("Figure 1. Successive pairs (u(n), u(n+1)) with u(n) < %s, out of %s pairs",
                                            WINDOW, fig_int(period)),
                                    sprintf("\u015eekil 1. %s \u00e7ift i\u00e7inden u(n) < %s olan ard\u0131\u015f\u0131k \u00e7iftler", fig_int(period), WINDOW)),
             function() {
   par(mfrow = c(1, 2))
-  titles <- c(L("V1 example 1", "S\u00fcr\u00fcm 1, \u00f6rnek 1"),
-              "Mersenne-Twister (R)")
+  titles <- c(L("(a) V1 example 1", "(a) S\u00fcr\u00fcm 1, \u00f6rnek 1"),
+              "(b) Mersenne-Twister")
+  x_ax <- axis_limits(c(0, WINDOW), WINDOW / 2)
+  y_ax <- axis_limits(c(0, 1), 0.5)
   for (j in 1:2) {
     p <- panels[[j]]
-    plot(NA, xlim = c(0, WINDOW), ylim = c(0, 1), xlab = "u(n)", ylab = "u(n+1)", xaxs = "i", yaxs = "i")
-    grid_lines(x = pretty(c(0, WINDOW)), y = seq(0, 1, 0.25))
-    points(p$x, p$y, pch = 16, cex = 0.35, col = cols[j])
-    panel_title(sprintf("%s (%d %s)", titles[j], length(p$x), L("points", "nokta")))
+    plot(NA, xlim = x_ax$lim, ylim = y_ax$lim, xlab = "u(n)", ylab = "u(n+1)", axes = FALSE)
+    value_axis(1, x_ax$at)
+    value_axis(2, y_ax$at)
+    points(p$x, p$y, pch = 16, cex = 0.3, col = cols[j], xpd = NA)
+    panel_title(sprintf("%s, %d %s", titles[j], length(p$x), L("points", "nokta")))
   }
 })

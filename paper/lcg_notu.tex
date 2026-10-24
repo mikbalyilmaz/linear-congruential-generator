@@ -1,60 +1,59 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[11pt,a4paper]{article}
 
-% Encoding and typeface: XeLaTeX with Latin Modern Roman (fontspec default), Turkish via polyglossia
+% Typeface: XeLaTeX with Latin Modern Roman (fontspec default)
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{turkish}
 
-% Layout (tight margins)
-\usepackage[a4paper,top=1.2cm,bottom=1.3cm,left=1.3cm,right=1.3cm]{geometry}
+% Page: the measures of the note template (A4, 11 pt, 4.5 cm side margins, header and page count)
+\usepackage[a4paper,left=4.5cm,right=4.5cm,top=4.5cm,bottom=4.1cm,headheight=14pt,headsep=0.55cm,
+  footskip=0.55cm]{geometry}
+\linespread{0.946}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{PROJE NOTU} $|$ LCG in R}
+\fancyhead[R]{\small\textbf{Derlenme tarihi:} \today}
+\fancyfoot[C]{\small\thepage\,/\,\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
 
-% Typography
 \usepackage{microtype}
-\usepackage{setspace}
-\setstretch{0.92}
-
-% Paragraph settings
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
-
-% Section styling
-\usepackage{titlesec}
-\titleformat{\section}{\bfseries\normalsize}{\thesection.}{0.4em}{}
-\titlespacing*{\section}{0pt}{6pt}{3pt}
-
-% Better lists
-\usepackage{enumitem}
-\setlist{noitemsep, topsep=2pt}
-
-% Mathematics, tables, figures
-\usepackage{amsmath}
-\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,tabularx}
 \usepackage{graphicx}
-\usepackage[font=small,labelfont=bf,labelsep=period,skip=3pt]{caption}
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=3pt, leftmargin=*}
+\usepackage{xcolor}
+\definecolor{secblue}{HTML}{1F3A5F}
+\definecolor{boxback}{HTML}{EEF2F6}
+\definecolor{mark}{HTML}{9B2226}
+\definecolor{hl}{HTML}{FFF36B}
+\usepackage{titlesec}
+\titleformat{\section}{\color{secblue}\bfseries\normalsize}{\thesection.}{0.4em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\usepackage[font=small,labelfont=bf,labelsep=period,skip=4pt]{caption}
+\usepackage[bottom]{footmisc}
 \captionsetup[figure]{name=Şekil}
 \captionsetup[table]{name=Tablo}
-\setlength{\textfloatsep}{8pt}
-\setlength{\floatsep}{6pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\textfloatsep}{10pt}
+\emergencystretch=3em
 
 \input{numbers_tr.tex}
 
 \begin{document}
 
-% Header (top-right)
-\begin{flushright}
-\small \textbf{Derlenme tarihi:} \today
-\end{flushright}
 
-\vspace{-6pt}
-\hrule
-\vspace{24pt}
+\vspace*{14pt}
+\begin{tabular}{@{}p{2.35cm}@{}p{\dimexpr\textwidth-2.35cm}@{}}
+\textbf{BAŞLIK:} & \textbf{\large Doğrusal eşlik üreteci (LCG): periyot, kafes yapısı ve ampirik testler}\\[3pt]
+\textbf{KONU:} & \texttt{linear-congruential-generator} deposunun 2.\ sürümündeki analizlerin amacı, yöntemi ve sonuçları\\[3pt]
+\textbf{YAZAR:} & Muhammed İkbal Yılmaz (myucanlar@gmail.com)
+\end{tabular}
 
-\textbf{BAŞLIK:} Doğrusal eşlik üreteci (LCG): periyot, kafes yapısı ve ampirik testler
-
-\textbf{KONU:} \texttt{linear-congruential-generator} deposunun 2.\ sürümündeki analizlerin amacı, yöntemi ve sonuçları
-
-\textbf{HAZIRLAYAN:} Muhammed İkbal Yılmaz (myucanlar@gmail.com)
-
+\vspace{8pt}
 \vspace{12pt}
 
 \section{Amaç ve kapsam}
@@ -116,14 +115,16 @@ olabilir (Knuth, 1997, §3.2.1.2). Teorinin doğrudan yanıt vermediği durumlar
 \centering\footnotesize\setlength{\tabcolsep}{4pt}
 \caption{Hull--Dobell koşulları ile kuyruk ve döngü uzunlukları (tohum $x_0=1$; 3.\ örnekte $x_0=27$). Koşullar yalnızca
 $c\ne0$ için gösterilmiştir.}\label{tab:periyot}
-\begin{tabular}{lrrlccccrl}
+\scriptsize\setlength{\tabcolsep}{1.8pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.8cm}rrlccccr>{\raggedright\arraybackslash}p{1.45cm}@{}}
 \toprule
  & & & & \multicolumn{3}{c}{Hull--Dobell} & & & \\
 \cmidrule(lr){5-7}
 Üreteç & $a$ & $c$ & $m$ & (i) & (ii) & (iii) & Kuyruk & Döngü & Yöntem \\
 \midrule
 \input{tab_periods_tr.tex}
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \textbf{Bulgu ve yorum.} 1.\ sürümün iki büyük örneğinin döngüleri yalnızca \ExOnePeriod{} ve \ExTwoPeriod{} sayıdır; bu,
@@ -154,7 +155,7 @@ yaklaşık 0,001 aralıklı olduğundan birim karenin tamamında görünmezler. 
 Kafes yapısı yoksa noktalar dağınık düşer.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.86\linewidth]{../figures/tr/fig1_pairs.pdf}
+\centering\includegraphics[width=\textwidth]{../figures/tr/fig1_pairs.pdf}
 \caption{Ardışık çiftler $(u_n, u_{n+1})$, $u_n < 0{,}004$. Sol: 1.\ sürümün 1.\ örneği, tam periyot. Sağ: aynı sayıda
 Mersenne-Twister çifti.}\label{fig:kafes}
 \end{figure}
@@ -179,9 +180,11 @@ beklenir. Ardından daha ince bir ızgarayla ($20^3$ hücre) \SerialN{} sayı ü
 \centering\footnotesize\setlength{\tabcolsep}{4pt}
 \caption{$p$-değerleri. İlk altı sütun: üreteç başına \BatteryN{} sayı. Son sütun: örtüşmeyen üçlüler, $20^3$ hücre,
 \SerialN{} sayı.}\label{tab:test}
-\begin{tabular}{lccccccc}
+\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.1cm}cccccc>{\raggedright\arraybackslash}p{1.5cm}@{}}
 \toprule
- & Eşit dağılım & KS & İkili & Üçlü & Otokorelasyon & Koşu & Üçlü, $20^3$ \\
+ & Eşit & & & & Oto- & & Üçlü, \\
+ & dağılım & KS & İkili & Üçlü & korelasyon & Koşu & $20^3$ \\
 \midrule
 \input{tab_battery_tr.tex}
 \end{tabular}
@@ -200,7 +203,7 @@ $9u_k - 6u_{k+1} + u_{k+2}$ her $k$ için bir tam sayıdır. Şekil bu bileşimi
 yayılır.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.86\linewidth]{../figures/tr/fig2_randu_planes.pdf}
+\centering\includegraphics[width=\textwidth]{../figures/tr/fig2_randu_planes.pdf}
 \caption{\RanduTriples{} ardışık üçlüde $9u_k - 6u_{k+1} + u_{k+2}$ değerinin histogramı (sütun genişliği 0,05).}\label{fig:randu}
 \end{figure}
 
@@ -222,7 +225,7 @@ görünür; böylece büyüme mertebesi doğrudan okunur. En küçük kareler e�
 \SlopeVTwo{}'dür (doğrusal).
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.86\linewidth]{../figures/tr/fig3_performance.pdf}
+\centering\includegraphics[width=\textwidth]{../figures/tr/fig3_performance.pdf}
 \caption{Çalışma süresi, üç ölçümün medyanı (\PerfMachine). Sol: döngünün bulunması (1.\ sürüm yalnızca $2^{15}$'e kadar).
 Sağ: $n$ MINSTD sayısının üretilmesi.}\label{fig:sure}
 \end{figure}
@@ -246,22 +249,23 @@ hızlıdır. Mutlak süreler makineye bağlıdır, büyüme mertebesi bağlı de
 
 \section*{Kaynaklar}
 {\small
-Brent, R. P. (1980). An improved Monte Carlo factorization algorithm. \textit{BIT}, 20, 176--184.\\
-Brown, F. B. (1994). Random number generation with arbitrary strides. \textit{Trans.\ American Nuclear Society}, 71, 202--203.\\
-Hull, T. E. ve Dobell, A. R. (1962). Random number generators. \textit{SIAM Review}, 4(3), 230--254.\\
-Knuth, D. E. (1997). \textit{The Art of Computer Programming, Vol.\ 2: Seminumerical Algorithms}, 3.\ baskı. Addison-Wesley.\\
-L'Ecuyer, P. (1999). Tables of linear congruential generators of different sizes and good lattice structure.
-\textit{Mathematics of Computation}, 68, 249--260.\\
-L'Ecuyer, P. ve Simard, R. (2007). TestU01: A C library for empirical testing of random number generators.
-\textit{ACM Trans.\ Mathematical Software}, 33, Makale 22.\\
-Marsaglia, G. (1968). Random numbers fall mainly in the planes. \textit{PNAS}, 61(1), 25--28.\\
-Matsumoto, M. ve Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number
-generator. \textit{ACM Trans.\ Modeling and Computer Simulation}, 8(1), 3--30.\\
-Park, S. K. ve Miller, K. W. (1988). Random number generators: Good ones are hard to find. \textit{Communications of the ACM},
-31(10), 1192--1201.
+\setlength{\parskip}{2pt}
+\hangindent=1.27cm\hangafter=1 Brent, R. P. (1980). An improved Monte Carlo factorization algorithm. \textit{BIT}, 20(2), 176--184.\par
+\hangindent=1.27cm\hangafter=1 Brown, F. B. (1994). Random number generation with arbitrary strides. \textit{Transactions of the American Nuclear Society}, 71, 202--203.\par
+\hangindent=1.27cm\hangafter=1 Hull, T. E., \& Dobell, A. R. (1962). Random number generators. \textit{SIAM Review}, 4(3), 230--254.\par
+\hangindent=1.27cm\hangafter=1 Knuth, D. E. (1997). \textit{The Art of Computer Programming, Vol.\ 2: Seminumerical Algorithms} (3.\ baskı). Addison-Wesley.\par
+\hangindent=1.27cm\hangafter=1 L'Ecuyer, P. (1999). Tables of linear congruential generators of different sizes and good lattice structure.
+\textit{Mathematics of Computation}, 68(225), 249--260.\par
+\hangindent=1.27cm\hangafter=1 L'Ecuyer, P., \& Simard, R. (2007). TestU01: A C library for empirical testing of random number generators.
+\textit{ACM Transactions on Mathematical Software}, 33(4), Makale 22.\par
+\hangindent=1.27cm\hangafter=1 Marsaglia, G. (1968). Random numbers fall mainly in the planes. \textit{Proceedings of the National Academy of Sciences}, 61(1), 25--28.\par
+\hangindent=1.27cm\hangafter=1 Matsumoto, M., \& Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number
+generator. \textit{ACM Transactions on Modeling and Computer Simulation}, 8(1), 3--30.\par
+\hangindent=1.27cm\hangafter=1 Park, S. K., \& Miller, K. W. (1988). Random number generators: Good ones are hard to find. \textit{Communications of the ACM},
+31(10), 1192--1201.\par
 
 \smallskip
-Kodun yazımında ve bu notun hazırlanmasında bir yapay zekâ kodlama asistanından yararlanılmıştır. Tüm sayılar
+Tüm sayılar
 \texttt{figures/*.csv} dosyalarından \texttt{make\_paper.R} ile üretilir.
 }
 
