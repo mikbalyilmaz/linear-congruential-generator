@@ -132,7 +132,7 @@ LCGs are not suitable for cryptography, and for simulation R's built-in generato
 
 Citation metadata are in [`CITATION.cff`](CITATION.cff); GitHub shows them under "Cite this repository".
 
-> Yılmaz, M. İ. (2026). *Linear congruential generator in R: period, lattice structure and empirical tests* (Version 2.1.0)
+> Yılmaz, M. İ. (2026). *Linear congruential generator in R: period, lattice structure and empirical tests* (Version 2.1.1)
 > [Computer software]. https://github.com/mikbalyilmaz/linear-congruential-generator
 
 ## Licence

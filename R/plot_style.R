@@ -118,7 +118,9 @@ value_axis <- function(side, at) {
 
 #' Logarithmic axis with tick labels written as powers of ten.
 log10_axis <- function(side, at) {
-  labels <- do.call(expression, lapply(round(log10(at)), function(k) bquote(10^.(k))))
+  minus <- if (isTRUE(l10n_info()[["UTF-8"]])) "\u2212" else "-"   # true minus sign where the locale allows it
+  labels <- do.call(expression, lapply(round(log10(at)), function(k)
+    if (k < 0) bquote(10^{.(minus) * .(-k)}) else bquote(10^.(k))))
   axis(side, at = at, labels = labels, lwd = 0.7, lwd.ticks = 0.7)
 }
 

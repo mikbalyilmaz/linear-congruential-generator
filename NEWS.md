@@ -1,5 +1,14 @@
 # Changes
 
+## Version 2.1.1
+
+No result changed: every table and every number in the notes is the same as in version 2.1.0.
+
+- Figure 2: the combination is written 9u(k) − 6u(k+1) + u(k+2), with a minus sign instead of a hyphen, in the heading
+  and on the horizontal axis; panel (b) reads "MINSTD (Park–Miller)" with an en dash.
+- Figure 3: negative powers of ten on the logarithmic axes (10⁻¹, …, 10⁻⁵) are written with a minus sign
+  (`log10_axis()` in `R/plot_style.R`; a hyphen is kept where the R session does not use UTF-8).
+
 ## Version 2.1.0
 
 No result changed: every table and every number in the notes is the same as in version 2.0.0.

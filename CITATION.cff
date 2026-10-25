@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "Linear congruential generator in R: period, lattice structure and empirical tests"
-version: 2.1.0
+version: 2.1.1
 authors:
   - family-names: "Yılmaz"
     given-names: "Muhammed İkbal"
