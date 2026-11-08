@@ -1,5 +1,9 @@
 # Changes
 
+## Version 2.2.1
+
+No result changed. The citation in the README gave version 2.1.2; it now gives the current version.
+
 ## Version 2.2.0
 
 No result changed. The repository is now in English only.
