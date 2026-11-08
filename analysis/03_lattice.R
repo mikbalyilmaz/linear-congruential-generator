@@ -33,12 +33,11 @@ panels <- list(window_pairs(u_lcg), window_pairs(u_mt))
 cols <- c(BLUE, INK)
 
 save_figure("fig1_pairs", height = 2.5,
-            heading = function() L(sprintf("Figure 1. Successive pairs (u(n), u(n+1)) with u(n) < %s, out of %s pairs",
+            heading = function() sprintf("Figure 1. Successive pairs (u(n), u(n+1)) with u(n) < %s, out of %s pairs",
                                            WINDOW, fig_int(period)),
-                                   sprintf("\u015eekil 1. %s \u00e7ift i\u00e7inden u(n) < %s olan ard\u0131\u015f\u0131k \u00e7iftler", fig_int(period), WINDOW)),
             function() {
   par(mfrow = c(1, 2))
-  titles <- c(L("(a) V1 example 1", "(a) S\u00fcr\u00fcm 1, \u00f6rnek 1"),
+  titles <- c("(a) V1 example 1",
               "(b) Mersenne-Twister")
   x_ax <- axis_limits(c(0, WINDOW), WINDOW / 2)
   y_ax <- axis_limits(c(0, 1), 0.5)
@@ -48,6 +47,6 @@ save_figure("fig1_pairs", height = 2.5,
     value_axis(1, x_ax$at)
     value_axis(2, y_ax$at)
     points(p$x, p$y, pch = 16, cex = 0.3, col = cols[j], xpd = NA)
-    panel_title(sprintf("%s, %d %s", titles[j], length(p$x), L("points", "nokta")))
+    panel_title(sprintf("%s, %d %s", titles[j], length(p$x), "points"))
   }
 })

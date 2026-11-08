@@ -74,8 +74,7 @@ cycle_times <- perf[perf$task == "cycle detection", ]
 gen_times <- perf[perf$task == "generation", ]
 
 save_figure("fig3_performance", height = 2.5,
-            heading = function() L("Figure 3. Running time of version 1 and version 2 (median of three runs)",
-                                   "\u015eekil 3. S\u00fcr\u00fcm 1 ve s\u00fcr\u00fcm 2'nin \u00e7al\u0131\u015fma s\u00fcresi"), function() {
+            heading = function() "Figure 3. Running time of version 1 and version 2 (median of three runs)", function() {
   par(mfrow = c(1, 2))
   draw_panel <- function(d, title, xlab) {
     x_ax <- log10_limits(d$size)
@@ -85,12 +84,12 @@ save_figure("fig3_performance", height = 2.5,
     log10_axis(2, y_ax$at)
     lines(d$size, d$v1_seconds, col = INK, lwd = 1.4, type = "o", pch = 16, cex = 0.5)
     lines(d$size, d$v2_seconds, col = BLUE, lwd = 1.4, type = "o", pch = 16, cex = 0.5)
-    legend("bottomright", legend = c(L("Version 1", "S\u00fcr\u00fcm 1"), L("Version 2", "S\u00fcr\u00fcm 2")),
+    legend("bottomright", legend = c("Version 1", "Version 2"),
            col = c(INK, BLUE), text.col = c(INK, BLUE), lwd = 1.4, pch = 16, pt.cex = 0.5, bty = "n",
            inset = c(0.02, 0), text.font = 2)
     panel_title(title)
   }
-  draw_panel(cycle_times, L("(a) Finding the cycle, seconds", "(a) D\u00f6ng\u00fcn\u00fcn bulunmas\u0131, saniye"),
-             L("Cycle length", "D\u00f6ng\u00fc uzunlu\u011fu"))
-  draw_panel(gen_times, L("(b) Generating n numbers, seconds", "(b) n say\u0131 \u00fcretme, saniye"), "n")
+  draw_panel(cycle_times, "(a) Finding the cycle, seconds",
+             "Cycle length")
+  draw_panel(gen_times, "(b) Generating n numbers, seconds", "n")
 })

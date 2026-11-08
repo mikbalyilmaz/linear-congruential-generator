@@ -6,8 +6,8 @@ $$x_{n+1} = (a\,x_n + c) \bmod m, \qquad u_n = x_n / m,$$
 
 with exact arithmetic, constant-memory cycle detection, jump-ahead, the period theory of Hull and Dobell and of the
 multiplicative case, a two-dimensional spectral test and a small battery of empirical tests. The analysis applies these
-tools to the three examples of version 1 and to three generators from the literature, and a short project note (in
-English and Turkish) explains why each analysis was done and what it shows. Base R only; no packages are needed.
+tools to the three examples of version 1 and to three generators from the literature, and a short project note
+explains why each analysis was done and what it shows. Base R only; no packages are needed.
 
 ## Contents
 
@@ -23,8 +23,8 @@ English and Turkish) explains why each analysis was done and what it shows. Base
 | `analysis/03_lattice.R` | Spectral test; successive pairs of example 1 against the Mersenne-Twister (Figure 1) |
 | `analysis/04_performance.R` | Running time of version 1 and version 2 (Figure 3) |
 | `analysis/run_all.R` | Runs the four scripts in order |
-| `figures/` | Every figure as PNG (300 dpi) and PDF (vector), every reported table as CSV; `figures/tr/` holds the Turkish versions of the figures |
-| `paper/lcg_note.pdf`, `paper/lcg_notu.pdf` | Project note in English and in Turkish; `make_paper.R` writes all their numbers and tables from `figures/*.csv` |
+| `figures/` | Every figure as PNG (300 dpi) and PDF (vector), every reported table as CSV |
+| `paper/lcg_note.pdf` | Project note in English; `make_paper.R` writes all their numbers and tables from `figures/*.csv` |
 | `legacy/lcg_v1.R` | Version 1, unchanged, used by the audit and the timing comparison |
 | `fonts/` | Latin Modern Roman, the typeface of the note and the figures (GUST Font License) |
 
@@ -60,7 +60,6 @@ Rscript 04_performance.R --plot-only   # redraw Figure 3 from the saved timings,
 cd ../paper
 Rscript make_paper.R
 xelatex lcg_note.tex && xelatex lcg_note.tex   # English; needs a TeX installation with XeLaTeX
-xelatex lcg_notu.tex && xelatex lcg_notu.tex   # Turkish
 ```
 
 Run the analysis scripts from inside `analysis/` (paths are relative). Seeds are fixed. Figures use Latin Modern Roman if it

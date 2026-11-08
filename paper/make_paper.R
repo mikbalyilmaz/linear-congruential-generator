@@ -1,16 +1,8 @@
 # Writes every number and table of the project note from ../figures/*.csv, so that the text cannot drift away
 # from the analysis. Run from inside paper/:  Rscript make_paper.R
 #
-# Output, once in Turkish (suffix _tr, for lcg_notu.tex) and once in English (suffix _en, for lcg_note.tex):
-# numbers_xx.tex (one macro per quoted number) and tab_*_xx.tex (table bodies, each ending with its bottom
-# rule, because a rule cannot follow \input directly inside a tabular). Turkish numbers use the decimal comma
-# and the full stop as thousands separator; English numbers the decimal point and the comma. Turkish
-# characters in strings are written as \u escapes, so that the script runs the same in every locale.
-
-# The tables contain Turkish characters; switch to a UTF-8 character locale if the session does not use one.
-if (!isTRUE(l10n_info()[["UTF-8"]])) {
-  for (loc in c("C.UTF-8", "en_US.UTF-8", "tr_TR.UTF-8")) if (nzchar(suppressWarnings(Sys.setlocale("LC_CTYPE", loc)))) break
-}
+# Output (suffix _en, for lcg_note.tex): numbers_en.tex (one macro per quoted number) and tab_*_en.tex (table
+# bodies, each ending with its bottom rule, because a rule cannot follow \input directly inside a tabular).
 
 fig <- function(name) read.csv(file.path("..", "figures", paste0(name, ".csv")), stringsAsFactors = FALSE)
 
@@ -18,15 +10,6 @@ fig <- function(name) read.csv(file.path("..", "figures", paste0(name, ".csv")),
 write_utf8 <- function(lines, file) writeLines(enc2utf8(lines), file, useBytes = TRUE)
 
 TEXT <- list(
-  tr = list(
-    names = c("V1 example 1" = "S\u00fcr\u00fcm 1, \u00f6rnek 1", "V1 example 2" = "S\u00fcr\u00fcm 1, \u00f6rnek 2",
-              "V1 example 3" = "S\u00fcr\u00fcm 1, \u00f6rnek 3", "RANDU" = "RANDU",
-              "MINSTD (Park-Miller)" = "MINSTD (Park--Miller)", "rand48 parameters" = "rand48 parametreleri",
-              "Mersenne-Twister (R)" = "Mersenne-Twister (R)"),
-    yes = "evet", no = "hay\u0131r", short = "periyot k\u0131sa",
-    method = c("Brent's algorithm" = "Brent", "Multiplicative order" = "$a$'n\u0131n mertebesi",
-               "Hull-Dobell theorem" = "Hull--Dobell"),
-    big = ".", dec = "{,}"),
   en = list(
     names = c("V1 example 1" = "Version 1, example 1", "V1 example 2" = "Version 1, example 2",
               "V1 example 3" = "Version 1, example 3", "RANDU" = "RANDU",
@@ -153,5 +136,5 @@ build <- function(lang) {
   write_utf8(c(body, "\\bottomrule"), paste0("tab_battery_", lang, ".tex"))
 }
 
-for (lang in c("tr", "en")) build(lang)
-cat("Wrote numbers_*.tex, tab_periods_*.tex and tab_battery_*.tex (tr, en).\n")
+for (lang in "en") build(lang)
+cat("Wrote numbers_*.tex, tab_periods_*.tex and tab_battery_*.tex (en).\n")

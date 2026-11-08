@@ -9,9 +9,8 @@
 # are used with xaxs = "i" and yaxs = "i", so that the plotting region ends exactly at the first and the last
 # tick; the axes are then drawn with value_axis() or log10_axis().
 #
-# Every figure is drawn twice: in English (figures/*.png and figures/*.pdf, used by the README and the English
-# note) and in Turkish (figures/tr/*.pdf, used by the Turkish note), with the decimal comma in the Turkish
-# version. Figures are 4.75 inches wide, the width of the text in the notes.
+# Figures are 4.75 inches wide, the width of the text in the notes. Each figure is written as figures/*.png (with a
+# heading, for the README) and figures/*.pdf (vector, without a heading, for the note).
 #
 # Author: Muhammed Ikbal Yilmaz
 
@@ -26,25 +25,17 @@ BAND <- "#c9d4ec"
 BLUE <- "#0033a0"
 RED <- "#d7191c"
 
-FIG_LANG <- "en"
+#' Format a whole number with a comma as the thousands separator.
+fig_int <- function(x) format(x, big.mark = ",", scientific = FALSE, trim = TRUE)
 
-#' Pick the English or the Turkish version of a label, depending on the figure being drawn.
-L <- function(en, tr) if (FIG_LANG == "tr") tr else en
-
-#' Format a whole number with the thousands separator of the current figure language.
-fig_int <- function(x) format(x, big.mark = L(",", "."), scientific = FALSE, trim = TRUE)
-
-#' Format a tick value with the decimal mark of the current figure language and a typographic minus sign.
+#' Format a tick value with a typographic minus sign.
 fig_num <- function(x) {
   s <- trimws(formatC(x, format = "fg", digits = 10, drop0trailing = TRUE))
-  if (FIG_LANG == "tr") s <- gsub(".", ",", s, fixed = TRUE)
   gsub("-", "\u2212", s, fixed = TRUE)
 }
 
 # Graphics devices. Cairo is preferred; on macOS it needs XQuartz, so if cairo cannot be loaded the Quartz
-# devices are used (macOS), and otherwise the standard png() and pdf() devices with a serif face. The last
-# option cannot encode every Turkish letter (for example the dotless i), so the Turkish figures are complete
-# only with cairo or Quartz.
+# devices are used (macOS), and otherwise the standard png() and pdf() devices with a serif face.
 device_kind <- local({
   kind <- NULL
   function() {
@@ -111,7 +102,7 @@ log10_limits <- function(values, every = 1) {
   list(lim = 10^c(a, b), at = 10^seq(a, b, by = every))
 }
 
-#' Linear value axis with labels in the figure language; the axis line runs from the first to the last tick.
+#' Linear value axis; the axis line runs from the first to the last tick.
 value_axis <- function(side, at) {
   axis(side, at = at, labels = vapply(at, fig_num, ""), lwd = 0.7, lwd.ticks = 0.7)
 }
@@ -153,13 +144,10 @@ wrap_heading <- function(text, width) {
   out
 }
 
-#' Draw `plot_fun` in both languages. English: `name`.png (300 dpi, with `heading`) and `name`.pdf (vector,
-#' without heading). Turkish: tr/`name`.pdf (vector, without heading: in the note the caption carries the
-#' title). `heading` is evaluated after the language is set, so it may use L().
+#' Draw `plot_fun`: `name`.png (300 dpi, with `heading`) and `name`.pdf (vector, without heading: in the note the
+#' caption carries the title).
 save_figure <- function(name, plot_fun, width = FIG_WIDTH, height = 2.6, heading = NULL) {
-  dir.create(file.path(FIG_DIR, "tr"), showWarnings = FALSE, recursive = TRUE)
-  old_dec <- getOption("OutDec")
-  on.exit({ FIG_LANG <<- "en"; options(OutDec = old_dec) }, add = TRUE)
+  dir.create(FIG_DIR, showWarnings = FALSE, recursive = TRUE)
   draw <- function(lines) {
     apply_par()
     if (length(lines)) par(oma = c(0, 0, 1.45 * length(lines) + 0.3, 0))
@@ -170,8 +158,6 @@ save_figure <- function(name, plot_fun, width = FIG_WIDTH, height = 2.6, heading
     }
   }
 
-  FIG_LANG <<- "en"
-  options(OutDec = ".")
   lines <- if (is.null(heading)) character(0) else wrap_heading(if (is.function(heading)) heading() else heading,
                                                                 width)
   extra <- if (length(lines)) (1.45 * length(lines) + 0.3) * 1.2 * POINTSIZE / 72 else 0
@@ -179,12 +165,6 @@ save_figure <- function(name, plot_fun, width = FIG_WIDTH, height = 2.6, heading
   draw(lines)
   grDevices::dev.off()
   open_pdf(file.path(FIG_DIR, paste0(name, ".pdf")), width, height)
-  draw(character(0))
-  grDevices::dev.off()
-
-  FIG_LANG <<- "tr"
-  options(OutDec = ",")
-  open_pdf(file.path(FIG_DIR, "tr", paste0(name, ".pdf")), width, height)
   draw(character(0))
   invisible(grDevices::dev.off())
 }
