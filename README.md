@@ -94,12 +94,19 @@ Section 3.3.4). Since $(-a, 1)$ always qualifies, a small multiplier forces clos
 | Cycle as share of $m$ | 0.72 % | 0.14 % | 25 % (the maximum, $\lambda(32) = 8$) |
 | Reason | Condition 2 fails | Conditions 1 and 2 fail; $\gcd(a, m) = 3$ | Multiplicative case |
 
+![Figure 1. Successive pairs of example 1 and of the Mersenne-Twister](figures/fig1_pairs.png)
+
 - All six generators pass six classical tests on 10,000 numbers. On 300,000 numbers a serial test of triples rejects
   RANDU ($\chi^2 = 80{,}064$ on 7,999 degrees of freedom); the first two examples cannot take that test, because their
   cycles are shorter than the sample.
+
+![Figure 2. Value of 9u(k) − 6u(k+1) + u(k+2) over 299,998 consecutive triples](figures/fig2_randu_planes.png)
+
 - Finding a cycle of length 32,768 takes 2.14 s with version 1 and 0.018 s with version 2 (R 4.5.1 on an Apple
   silicon Mac; times depend on the machine). Generating $10^7$ numbers takes 0.69 s in a plain loop and 0.16 s with
   blocked jumps.
+
+![Figure 3. Running time of version 1 and version 2](figures/fig3_performance.png)
 
 Every number above is in `figures/*.csv` and in the project note.
 
@@ -120,19 +127,19 @@ LCGs are not suitable for cryptography, and for simulation R's built-in generato
 
 - Brent, R. P. (1980). An improved Monte Carlo factorization algorithm. *BIT*, 20, 176–184.
 - Brown, F. B. (1994). Random number generation with arbitrary strides. *Transactions of the American Nuclear Society*, 71, 202–203.
-- Hull, T. E. and Dobell, A. R. (1962). Random number generators. *SIAM Review*, 4(3), 230–254.
+- Hull, T. E., & Dobell, A. R. (1962). Random number generators. *SIAM Review*, 4(3), 230–254.
 - Knuth, D. E. (1997). *The Art of Computer Programming, Volume 2: Seminumerical Algorithms*, 3rd ed. Addison-Wesley.
 - L'Ecuyer, P. (1999). Tables of linear congruential generators of different sizes and good lattice structure. *Mathematics of Computation*, 68, 249–260.
-- L'Ecuyer, P. and Simard, R. (2007). TestU01: A C library for empirical testing of random number generators. *ACM Transactions on Mathematical Software*, 33, Article 22.
+- L'Ecuyer, P., & Simard, R. (2007). TestU01: A C library for empirical testing of random number generators. *ACM Transactions on Mathematical Software*, 33, Article 22.
 - Marsaglia, G. (1968). Random numbers fall mainly in the planes. *Proceedings of the National Academy of Sciences of the USA*, 61(1), 25–28.
-- Matsumoto, M. and Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number generator. *ACM Transactions on Modeling and Computer Simulation*, 8(1), 3–30.
-- Park, S. K. and Miller, K. W. (1988). Random number generators: Good ones are hard to find. *Communications of the ACM*, 31(10), 1192–1201.
+- Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number generator. *ACM Transactions on Modeling and Computer Simulation*, 8(1), 3–30.
+- Park, S. K., & Miller, K. W. (1988). Random number generators: Good ones are hard to find. *Communications of the ACM*, 31(10), 1192–1201.
 
 ## Citation
 
 Citation metadata are in [`CITATION.cff`](CITATION.cff); GitHub shows them under "Cite this repository".
 
-> Yılmaz, M. İ. (2026). *Linear congruential generator in R: period, lattice structure and empirical tests* (Version 2.1.1)
+> Yılmaz, M. İ. (2026). *Linear congruential generator in R: period, lattice structure and empirical tests* (Version 2.1.2)
 > [Computer software]. https://github.com/mikbalyilmaz/linear-congruential-generator
 
 ## Licence

@@ -1,5 +1,12 @@
 # Changes
 
+## Version 2.1.2
+
+No result changed: every table and every number in the notes is the same as in version 2.1.1.
+
+- README: the three figures are shown under the results they belong to.
+- README: references use an ampersand before the last author (APA 7), as in the notes.
+
 ## Version 2.1.1
 
 No result changed: every table and every number in the notes is the same as in version 2.1.0.
